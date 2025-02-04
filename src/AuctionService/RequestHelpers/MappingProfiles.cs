@@ -2,6 +2,7 @@ using System;
 using AuctionService.DTOs;
 using AuctionService.Entities;
 using AutoMapper;
+using Contracts;
 
 namespace AuctionService.RequestHelpers;
 
@@ -27,5 +28,8 @@ public class MappingProfiles : Profile
 
         CreateMap<CreateAuctionDto, Item>(); 
         //Maps CreateAuctionDto directly to the Item entity, which is useful when CreateAuctionDto has fields that correspond to Item.
+        CreateMap<AuctionDto, AuctionCreated>();
+        CreateMap<Auction, AuctionUpdated>().IncludeMembers(a => a.Item);
+        CreateMap<Item, AuctionUpdated>();
     }
 }
